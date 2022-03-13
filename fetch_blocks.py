@@ -1,11 +1,9 @@
 import requests
 import datetime
 from datetime import datetime, timedelta
-import time
 import pandas as pd
 import gzip
 import shutil
-from urllib import request
 import os
 
 # Using https://gz.blockchair.com/bitcoin/blocks/
