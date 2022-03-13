@@ -20,23 +20,6 @@ def query_btc(endpoint):
         print(f"Error: " + str(parsed_response["err_no"]))    
     return {}
 
-
-
-
-# Using blockchair API:
-
-# URL_BASE = "https://api.blockchair.com/bitcoin/blocks?q=time(2009-01-01..2009-12-31)&limit=100800&export=csv"
-
-# resp = requests.get(URL_BASE)
-# print(resp)
-# print(resp.json())
-# print(len(resp.json()["data"]))
-
-# Using chainAPI.com API:
-
-
-# latest_block_data = query_btc("/721054") # "/latest")
-# current_height = int(latest_block_data["data"]["height"])
 prev = datetime.datetime.now()
 block_counter = 0
 for i in range(1,100800):
