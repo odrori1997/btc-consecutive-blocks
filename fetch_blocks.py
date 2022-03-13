@@ -6,6 +6,11 @@ import gzip
 import shutil
 import os
 
+
+# author: @odrori1997
+# Please check out the README for the intuition behind this code. 
+
+
 # Using https://gz.blockchair.com/bitcoin/blocks/
 URL_BASE = f"https://gz.blockchair.com/bitcoin/outputs/blockchair_bitcoin_outputs_"
 
@@ -53,4 +58,8 @@ def count_block_intervals(start_dt):
 download_files(start_dt)
 
 print(" -- Final count -- ")
-print(count_block_intervals(start_dt))
+# Final count = year 1 of block times > 2 hours + 1% of blocks in remaining years
+# Current block height = 727167
+# 2,016 blocks mined every 2 weeks
+final_count = count_block_intervals(start_dt) + 0.01 * (727167 - (2016 * 26))
+print(final_count)
