@@ -13,7 +13,7 @@ import os
 
 # Using https://gz.blockchair.com/bitcoin/blocks/
 URL_BASE = f"https://gz.blockchair.com/bitcoin/outputs/blockchair_bitcoin_outputs_"
-APIKEY = "APIKEY=A___MmrGR8YFGGAeYAfhesqNsQlrPmMD" # os.environ("APIKEY")
+APIKEY = os.environ("APIKEY")
 
 start_date = "2009/01/02" # date of bitcoin inception
 start_dt = datetime.strptime(start_date, "%Y/%m/%d")
