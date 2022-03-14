@@ -13,7 +13,7 @@ import os
 
 # Using https://gz.blockchair.com/bitcoin/blocks/
 URL_BASE = f"https://gz.blockchair.com/bitcoin/outputs/blockchair_bitcoin_outputs_"
-APIKEY = os.environ("APIKEY")
+# APIKEY = os.environ("APIKEY")
 
 start_date = "2009/01/02" # date of bitcoin inception
 start_dt = datetime.strptime(start_date, "%Y/%m/%d")
@@ -41,7 +41,8 @@ def count_block_intervals(start_dt):
     block_counter = -1 # first block will count as >2 hours
     for _ in range(365):
         start_dt += timedelta(days=1)
-        fname = start_dt.strftime("%Y%m%d") + '.csv'
+        folder = f"data/"
+        fname = folder + start_dt.strftime("%Y%m%d") + '.csv'
         with open(fname, "rb") as f:
             try: 
                 df = pd.read_csv(fname,delimiter="\t")
