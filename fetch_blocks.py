@@ -65,4 +65,4 @@ print(" -- Final count -- ")
 # Current block height = 727167
 # 2,016 blocks mined every 2 weeks
 final_count = count_block_intervals(start_dt) + 0.01 * (727167 - (2016 * 26))
-print(final_count)
+print(final_count) # Final answer: 7186
