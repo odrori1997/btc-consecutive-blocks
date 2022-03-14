@@ -13,6 +13,7 @@ import os
 
 # Using https://gz.blockchair.com/bitcoin/blocks/
 URL_BASE = f"https://gz.blockchair.com/bitcoin/outputs/blockchair_bitcoin_outputs_"
+APIKEY = "APIKEY=A___MmrGR8YFGGAeYAfhesqNsQlrPmMD" # os.environ("APIKEY")
 
 start_date = "2009/01/02" # date of bitcoin inception
 start_dt = datetime.strptime(start_date, "%Y/%m/%d")
@@ -20,7 +21,8 @@ start_dt = datetime.strptime(start_date, "%Y/%m/%d")
 def download_files(start_dt):
     for _ in range(365):
         start_dt += timedelta(days=1)
-        endpoint = URL_BASE + start_dt.strftime("%Y%m%d") +".tsv.gz?key=" + os.environ("APIKEY")
+        endpoint = URL_BASE + start_dt.strftime("%Y%m%d") +".tsv.gz?key=" + APIKEY
+        print(endpoint)
         fname = start_dt.strftime("%Y%m%d") + '.csv'
         resp = requests.get(endpoint, verify=False)
         try:
@@ -48,11 +50,12 @@ def count_block_intervals(start_dt):
                 print(f"Error: {e}")
                 continue
             for _, row in df.iterrows():
-                tdelta = datetime.strptime(row["time"], "%Y-%m-%d %H:%M:%S") - prev
+                row_time = datetime.strptime(row["time"], "%Y-%m-%d %H:%M:%S")
+                tdelta = row_time - prev
                 if tdelta >= timedelta(hours=2):
                     block_counter += 1
                 print("Block counter: " + str(block_counter) + "\nFound block mined " + str(tdelta) + " after previous")
-                prev = row["time"]
+                prev = datetime.strptime(row["time"], "%Y-%m-%d %H:%M:%S")
     return block_counter
 
 download_files(start_dt)
